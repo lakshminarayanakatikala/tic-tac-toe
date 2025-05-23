@@ -4,12 +4,12 @@ const Cell = ({ emoji, onClick, isWinningCell }) => {
   return (
     <motion.button
       className={`
-        w-17 h-17 sm:w-21 sm:h-21 md:w-24 md:h-24 xl:w-26 xl:h-26
-        border text-4xl flex items-center justify-center rounded-xl shadow-xl
+        w-15 h-15 sm:w-20 sm:h-20 md:w-22 md:h-22 xl:w-23 xl:h-23
+        border text-4xl flex items-center justify-center rounded-xl shadow-xl 
         ${isWinningCell 
-          ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary-dull)] animate-pulse' 
+          ? "bg-[var(--color-primary)] text-white border-[var(--color-primary-dull)] animate-[pulse_4s_ease-in-out_infinite]"
           : 'bg-white text-black border-gray-300'}
-        transition-all duration-300 ease-in-out
+        transition-all duration-100 ease-in-out
       `}
       onClick={onClick}
       whileHover={{ scale: 1.1 }}

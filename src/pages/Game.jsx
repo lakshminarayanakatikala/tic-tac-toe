@@ -89,14 +89,15 @@ const Game = ({ onPlayAgain, onBack }) => {
 
   return (
     <div className="text-center bg-white bg-opacity-90 p-6 rounded-2xl shadow-2xl max-w-lg w-full">
-    <h1 className="text-1xl sm:text-2xl md:text-3xl xl:text-4xl font-extrabold text-[var(--color-primary)] mb-6">
-    ✨ Blink Tac Toe ✨
-    </h1>
+      <h1 className="text-1xl sm:text-2xl md:text-3xl xl:text-4xl font-extrabold text-[var(--color-primary)] mb-6">
+        ✨ Blink Tac Toe ✨
+      </h1>
+
       {!mode ? (
         <div>
           <p className="mb-4 text-xl font-semibold">Choose Game Mode:</p>
-          <button onClick={() => setMode('ai')} className="px-4 py-2 bg-blue-600 text-white m-2 rounded-lg shadow-lg hover:scale-105 transition-transform">Player vs AI</button>
-          <button onClick={() => setMode('pvp')} className="px-4 py-2 bg-green-600 text-white m-2 rounded-lg shadow-lg hover:scale-105 transition-transform">Player vs Player</button>
+          <button onClick={() => setMode('ai')} className="px-4 py-2 bg-[var(--color-primary)] text-white m-2 rounded-lg shadow-lg hover:scale-105 transition-transform">Player vs AI</button>
+          <button onClick={() => setMode('pvp')} className="px-4 py-2 bg-[var(--color-primary-dull)] text-white m-2 rounded-lg shadow-lg hover:scale-105 transition-transform">Player vs Player</button>
         </div>
       ) : !categorySelected ? (
         <div className="space-y-4">
@@ -156,8 +157,21 @@ const Game = ({ onPlayAgain, onBack }) => {
             )}
             {winner && (
               <div className="flex justify-center gap-4">
-                <button onClick={onPlayAgain} className="px-6 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-primary-dull)]">Play Again</button>
-                <button onClick={onBack} className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-800">Back</button>
+                <button
+                  onClick={() => {
+                    setBoard(Array(9).fill(null));
+                    setMoves({ player1: [], player2: [] });
+                    setWinner(null);
+                    setWinningLine([]);
+                    setTurn('player1');
+                  }}
+                  className="px-6 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-primary-dull)]"
+                >
+                  Play Again
+                </button>
+                <button onClick={onBack} className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-800">
+                  Back
+                </button>
               </div>
             )}
           </div>
@@ -168,6 +182,3 @@ const Game = ({ onPlayAgain, onBack }) => {
 };
 
 export default Game;
-
-
-
