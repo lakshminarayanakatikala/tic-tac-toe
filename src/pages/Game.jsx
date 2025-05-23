@@ -89,7 +89,7 @@ const Game = ({ onPlayAgain, onBack }) => {
 
   return (
     <div className="text-center bg-white bg-opacity-90 p-6 rounded-2xl shadow-2xl max-w-lg w-full">
-    <h1 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-extrabold text-[var(--color-primary)] mb-6">
+    <h1 className="text-1xl sm:text-2xl md:text-3xl xl:text-4xl font-extrabold text-[var(--color-primary)] mb-6">
     ✨ Blink Tac Toe ✨
     </h1>
       {!mode ? (
@@ -146,7 +146,7 @@ const Game = ({ onPlayAgain, onBack }) => {
           <div className="mt-6 space-y-4">
             {winner && (
               <motion.div
-                className="text-1xl sm:text-2xl md:text-3xl xl:text-5xl font-extrabold text-[var(--color-primary)] mb-6"
+                className="text-1xl sm:text-2xl md:text-3xl xl:text-4xl font-extrabold text-[var(--color-primary)] mb-6"
                 initial={{ scale: 0.5, rotate: -20 }}
                 animate={{ scale: 1.2, rotate: 0 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 20 }}
