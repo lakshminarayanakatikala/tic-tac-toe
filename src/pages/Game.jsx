@@ -4,19 +4,19 @@ import { getRandomAIMove } from '../utils/ai';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const emojiCategories = {
-  Animals: ['🐱', '🐶', '🐵', '🦊'],
-  Food: ['🍕', '🍟', '🍔', '🍩'],
-  Sports: ['⚽', '🏀', '🏈', '🎾'],
-  Faces: ['😀', '😎', '🥳', '😭'],
-  Nature: ['🌳', '🌻', '🌈', '⛄'],
-  Travel: ['🚗', '✈️', '🚀', '🚢'],
-  Music: ['🎵', '🎸', '🎺', '🥁'],
-  Symbols: ['❤️', '💡', '🔥', '✨'],
-  Jobs: ['👨‍💻', '👩‍🍳', '🧑‍🏫', '👨‍🚀'],
-  Drinks: ['🍺', '☕', '🥤', '🍷'],
-  Tech: ['💻', '📱', '🖥️', '🕹️'],
-  Weather: ['☀️', '🌧️', '⛈️', '❄️'],
-  Fantasy: ['🐉', '🧚', '🧙', '🦄']
+  Animals: ['🐱', '🐶', '🐵', '🦊', '🐯', '🦁', '🐼', '🐸', '🐷', '🐨', '🦓', '🐰', '🐮', '🐔', '🐙', '🐢', '🐧', '🐍', '🦜', '🦘'],
+  Food: ['🍕', '🍟', '🍔', '🍩', '🍣', '🍙', '🍗', '🍜', '🍪', '🍞', '🥐', '🥞', '🥗', '🍛', '🍦', '🍫', '🍰', '🍇', '🍉', '🍒'],
+  Sports: ['⚽', '🏀', '🏈', '🎾', '🏐', '🏉', '🥏', '🎳', '🥊', '⛳', '🏓', '🎯', '🥋', '⛸️', '🤺', '🏹', '🥌', '🚴‍♂️', '🏇', '🏂'],
+  Faces: ['😀', '😎', '🥳', '😭', '😡', '😍', '😱', '😴', '🤓', '🤔', '😇', '😤', '😅', '😜', '😬', '🤠', '🥶', '😈', '🤡', '😷'],
+  Nature: ['🌳', '🌻', '🌈', '⛄', '🌴', '🍁', '🌼', '🌷', '🌹', '🌾', '🌵', '🌸', '🍀', '🪵', '🍂', '🍃', '🪺', '🪸', '🪷', '🪹'],
+  Travel: ['🚗', '✈️', '🚀', '🚢', '🚆', '🚌', '🚲', '🚁', '🚤', '🏍️', '🛵', '🚜', '🚟', '🚠', '🚡', '🚚', '🛺', '🚇', '🛫', '🛬'],
+  Music: ['🎵', '🎸', '🎺', '🥁', '🎻', '🎷', '🎼', '🎤', '🎧', '📯', '🎚️', '🎙️', '🎛️', '🪗', '🪕', '📻', '🎞️', '📼', '🔊', '🔔'],
+  Symbols: ['❤️', '💡', '🔥', '✨', '💥', '💫', '❣️', '💤', '💯', '✅', '⚡', '🔔', '🔒', '🔓', '💎', '🛑', '❌', '➕', '➖', '➗'],
+  Jobs: ['👨‍💻', '👩‍🍳', '🧑‍🏫', '👨‍🚀', '👩‍🎨', '👨‍🔬', '👩‍⚕️', '👨‍✈️', '👮', '🕵️', '🧑‍🚒', '👷', '🧑‍🌾', '🧑‍🔧', '👩‍⚖️', '🧑‍💼', '🧑‍✈️', '👩‍🔬', '🧑‍🎓', '👨‍🎓'],
+  Drinks: ['🍺', '☕', '🥤', '🍷', '🍸', '🍹', '🥂', '🧃', '🧉', '🍼', '🍶', '🫖', '🧊', '🍵', '🍾', '🥃', '🧋', '🥛', '🫗', '🫙'],
+  Tech: ['💻', '📱', '🖥️', '🕹️', '🧠', '📡', '🖨️', '📷', '🖱️', '💽', '🧮', '🗜️', '🧲', '💾', '📼', '💿', '📀', '📠', '🖲️', '🪟'],
+  Weather: ['☀️', '🌧️', '⛈️', '❄️', '🌩️', '🌤️', '🌪️', '🌫️', '🌨️', '🌦️', '🌬️', '☁️', '🌡️', '🌞', '🌂', '🌈', '☔', '🌫️', '🌤️', '⛅'],
+  Fantasy: ['🐉', '🧚', '🧙', '🦄', '🧜', '🧞', '🧛', '👻', '🎃', '👹', '👺', '🕸️', '🧟', '👽', '👾', '🧌', '🦸', '🦹', '🪄', '🔮']
 };
 
 const Game = ({ onPlayAgain, onBack }) => {
@@ -68,8 +68,13 @@ const Game = ({ onPlayAgain, onBack }) => {
   }, [turn]);
 
   const getRandomEmoji = (player) => {
-    const set = player === 'player1' ? emojiCategories[player1Category] : emojiCategories[player2Category];
-    return set[Math.floor(Math.random() * set.length)];
+    const category = player === 'player1' ? player1Category : player2Category;
+    const usedEmojis = moves[player].map(m => m.emoji);
+    const available = emojiCategories[category].filter(e => !usedEmojis.includes(e));
+
+    if (available.length === 0) return emojiCategories[category][Math.floor(Math.random() * emojiCategories[category].length)];
+
+    return available[Math.floor(Math.random() * available.length)];
   };
 
   const checkWinner = (brd, player) => {
@@ -89,7 +94,7 @@ const Game = ({ onPlayAgain, onBack }) => {
 
   return (
     <div className="text-center bg-white bg-opacity-90 p-6 rounded-2xl shadow-2xl max-w-lg w-full">
-      <h1 className="text-1xl sm:text-2xl md:text-3xl xl:text-4xl font-extrabold text-[var(--color-primary)] mb-6">
+      <h1 className="text-2xl font-extrabold text-[var(--color-primary)] mb-6">
         ✨ Blink Tac Toe ✨
       </h1>
 
@@ -147,7 +152,7 @@ const Game = ({ onPlayAgain, onBack }) => {
           <div className="mt-6 space-y-4">
             {winner && (
               <motion.div
-                className="text-1xl sm:text-2xl md:text-3xl xl:text-4xl font-extrabold text-[var(--color-primary)] mb-6"
+                className="text-2xl font-extrabold text-[var(--color-primary)] mb-6"
                 initial={{ scale: 0.5, rotate: -20 }}
                 animate={{ scale: 1.2, rotate: 0 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 20 }}
