@@ -59,16 +59,16 @@ export default function App() {
         <div className="mx-auto max-w-6xl text-center">
           <div className="mb-6">
             <div className="inline-block rounded-full bg-gray-100 px-4 py-2 text-sm font-medium">
-              🎮 Now Playing: Blink Tac Toe
+              🎮 Now Playing: Emoji Clash
             </div>
           </div>
 
           <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
             <span className="bg-[var(--color-primary)] bg-clip-text text-transparent">
-              Blink Tac Toe
+              Emoji Clash
             </span>
             <br />
-            <span className="text-gray-500">Play Tic Tac Toe Like Never Before</span>
+            <span className="text-gray-500">Play Emoji Clash Like Never Before</span>
           </h1>
 
           <p className="mx-auto mb-8 max-w-2xl text-xl text-gray-600 md:text-2xl">
@@ -84,7 +84,7 @@ export default function App() {
               Play Now - It’s Free!
             </button>
 
-            <button className="inline-flex items-center justify-center rounded-lg border border-gray-300 px-8 py-4 text-lg font-semibold text-gray-800 hover:bg-gray-100">
+            <button className="inline-flex items-center justify-center rounded-lg border border-gray-300 px-8 py-4 text-lg font-semibold text-gray-800 hover:bg-gray-100" onClick={() => window.open("https://www.youtube.com/shorts/VkRLne8I3jc?t=6&feature=share", "_self")}>
               <GamepadIcon className="mr-2 h-5 w-5" />
               Watch Demo
             </button>
@@ -98,7 +98,7 @@ export default function App() {
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold text-gray-500 md:text-5xl">How to Play</h2>
             <p className="mx-auto max-w-2xl text-xl text-gray-600">
-              Blink Tac Toe introduces innovative rules to keep you on your toes. Here's what makes it different:
+              Emoji Clash introduces innovative rules to keep you on your toes. Here's what makes it different:
             </p>
           </div>
 
@@ -123,7 +123,7 @@ export default function App() {
       <section className="px-4 py-20">
         <div className="mx-auto max-w-4xl text-center">
           <div className="rounded-3xl bg-[var(--color-primary)] p-12 text-white">
-            <h2 className="mb-4 text-4xl font-bold md:text-5xl">Ready to Blink?</h2>
+            <h2 className="mb-4 text-4xl font-bold md:text-5xl">Ready to Clash?</h2>
             <p className="mb-8 text-xl opacity-90">
               Start your game now and discover the fun of vanishing moves and emoji wars!
             </p>
@@ -158,14 +158,14 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t bg-white px-4 py-12">
+      <footer className=" bg-white px-4 py-12">
         <div className="mx-auto max-w-6xl text-center">
           <div className="mb-4 text-2xl font-bold bg-[var(--color-primary)] bg-clip-text text-transparent">
-            Blink Tac Toe
+            Emoji Clash
           </div>
           <p className="text-gray-600">Built with React, and modern web technologies</p>
           <div className="mt-4 text-sm text-gray-500">
-            © 2024 Blink Tac Toe. Made with 💚 for players who love a twist.
+            © 2024 Emoji Clash. Made with 💚 for players who love a twist.
           </div>
         </div>
       </footer>

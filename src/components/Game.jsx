@@ -58,7 +58,7 @@ const Game = ({ onPlayAgain, onBack }) => {
   return (
     <div className="text-center bg-white bg-opacity-90 p-6 rounded-2xl shadow-2xl max-w-lg w-full">
       <h1 className="text-2xl font-extrabold text-[var(--color-primary)] mb-6">
-        ✨ Blink Tac Toe ✨
+        ✨ Emoji Clash ✨
       </h1>
 
       {!mode ? (
