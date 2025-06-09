@@ -46,6 +46,8 @@ const Dropdown = ({ label, selected, onSelect, options }) => {
 
 const CategorySelector = ({
   player1Category,
+  player1Name,
+  player2Name,
   setPlayer1Category,
   player2Category,
   setPlayer2Category,
@@ -59,7 +61,7 @@ const CategorySelector = ({
   return (
     <div className="space-y-6 max-w-md mx-auto text-center">
       <div>
-        <p className="mb-2 font-medium">Player 1 Category</p>
+        <p className="mb-2 font-medium">{player1Name} Category</p>
         <Dropdown
           label="Player 1"
           selected={player1Category}
@@ -70,7 +72,7 @@ const CategorySelector = ({
 
       {player1Category && (
         <div>
-          <p className="mb-2 font-medium">{mode === 'ai' ? 'AI' : 'Player 2'} Category</p>
+          <p className="mb-2 font-medium">{mode === 'ai' ? 'AI' : player2Name } Category</p>
           <Dropdown
             label={mode === 'ai' ? 'AI' : 'Player 2'}
             selected={player2Category}

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   Play,
   Users,
@@ -9,19 +9,30 @@ import {
   ArrowRight,
   GamepadIcon,
   Clock,
-} from "lucide-react"
-import Game from "./components/Game.jsx" 
-import { div } from "framer-motion/client";
+} from "lucide-react";
+import Game from "./components/Game.jsx";
 
 export default function App() {
   const [showGame, setShowGame] = useState(false);
   const [playAgainTrigger, setPlayAgainTrigger] = useState(false);
+  const [scores, setScores] = useState({ player1: 0, player2: 0, ai: 0 });
+  const [showDemo, setShowDemo] = useState(false);
+
+  const handleWin = (winner, mode) => {
+    setScores((prev) => {
+      if (winner === "player1") return { ...prev, player1: prev.player1 + 1 };
+      if (winner === "player2") return { ...prev, player2: prev.player2 + 1 };
+      if (winner === "ai") return { ...prev, ai: prev.ai + 1 };
+      return prev;
+    });
+  };
 
   const rules = [
     {
       icon: <Zap className="h-6 w-6 text-green-500" />,
       title: "Blink Rule",
-      description: "Oldest move vanishes after every new move – keep your strategy dynamic!",
+      description:
+        "Oldest move vanishes after every new move – keep your strategy dynamic!",
     },
     {
       icon: <Users className="h-6 w-6 text-green-500" />,
@@ -31,25 +42,32 @@ export default function App() {
     {
       icon: <Star className="h-6 w-6 text-green-500" />,
       title: "Emoji Gameplay",
-      description: "Choose from fun emoji categories to make every game expressive.",
+      description:
+        "Choose from fun emoji categories to make every game expressive.",
     },
     {
       icon: <RotateCcw className="h-6 w-6 text-green-500" />,
       title: "Win Logic",
-      description: "Even if a win disappears, it's recorded and celebrated with animation.",
+      description:
+        "Even if a win disappears, it's recorded and celebrated with animation.",
     },
-  ]
+  ];
 
   if (showGame) {
     return (
-      <div  className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center">
-          <Game
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center">
+        <Game
+          scores={scores}
           playAgainTrigger={playAgainTrigger}
-          onPlayAgain={() => setPlayAgainTrigger(prev => !prev)}
-          onBack={() => setShowGame(false)}
+          onWin={handleWin}
+          onPlayAgain={() => setPlayAgainTrigger((prev) => !prev)}
+          onBack={() => {
+            setShowGame(false);
+            setScores({ player1: 0, player2: 0, ai: 0 });
+          }}
         />
       </div>
-    )
+    );
   }
 
   return (
@@ -68,11 +86,14 @@ export default function App() {
               Emoji Clash
             </span>
             <br />
-            <span className="text-gray-500">Play Emoji Clash Like Never Before</span>
+            <span className="text-gray-500">
+              Play Emoji Clash Like Never Before
+            </span>
           </h1>
 
           <p className="mx-auto mb-8 max-w-2xl text-xl text-gray-600 md:text-2xl">
-            Experience a fun twist on the classic game. Blinking tiles, emoji madness, and smart win tracking!
+            Experience a fun twist on the classic game. Blinking tiles, emoji
+            madness, and smart win tracking!
           </p>
 
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
@@ -84,7 +105,10 @@ export default function App() {
               Play Now - It’s Free!
             </button>
 
-            <button className="inline-flex items-center justify-center rounded-lg border border-gray-300 px-8 py-4 text-lg font-semibold text-gray-800 hover:bg-gray-100" onClick={() => window.open("https://www.youtube.com/shorts/VkRLne8I3jc?t=6&feature=share", "_self")}>
+            <button
+              className="inline-flex items-center justify-center rounded-lg border border-gray-300 px-8 py-4 text-lg font-semibold text-gray-800 hover:bg-gray-100"
+              onClick={() => setShowDemo(true)}
+            >
               <GamepadIcon className="mr-2 h-5 w-5" />
               Watch Demo
             </button>
@@ -96,9 +120,12 @@ export default function App() {
       <section className="px-4 py-20">
         <div className="mx-auto max-w-5xl">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-500 md:text-5xl">How to Play</h2>
+            <h2 className="mb-4 text-4xl font-bold text-gray-500 md:text-5xl">
+              How to Play
+            </h2>
             <p className="mx-auto max-w-2xl text-xl text-gray-600">
-              Emoji Clash introduces innovative rules to keep you on your toes. Here's what makes it different:
+              Emoji Clash introduces innovative rules to keep you on your toes.
+              Here's what makes it different:
             </p>
           </div>
 
@@ -110,7 +137,9 @@ export default function App() {
               >
                 <div className="rounded-full bg-blue-100 p-2">{rule.icon}</div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-800">{rule.title}</h3>
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    {rule.title}
+                  </h3>
                   <p className="mt-1 text-gray-600">{rule.description}</p>
                 </div>
               </div>
@@ -125,7 +154,8 @@ export default function App() {
           <div className="rounded-3xl bg-[var(--color-primary)] p-12 text-white">
             <h2 className="mb-4 text-4xl font-bold md:text-5xl">Ready to Clash?</h2>
             <p className="mb-8 text-xl opacity-90">
-              Start your game now and discover the fun of vanishing moves and emoji wars!
+              Start your game now and discover the fun of vanishing moves and
+              emoji wars!
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
@@ -133,7 +163,7 @@ export default function App() {
                 onClick={() => setShowGame(true)}
                 className="group inline-flex items-center justify-center rounded-lg bg-white px-8 py-4 text-lg font-semibold text-[var(--color-primary)] hover:bg-gray-100"
               >
-                <Play className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                <Play className="mr-2 h-5 w-5 transition-transform group-hover:scale-110 " />
                 Start Playing Now
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </button>
@@ -157,18 +187,35 @@ export default function App() {
         </div>
       </section>
 
+      {/* Demo Video Modal */}
+      {showDemo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+          <div className="bg-white rounded-lg p-6 max-w-3xl w-full relative">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+              onClick={() => setShowDemo(false)}
+            >
+              ✕
+            </button>
+            <video controls className="w-full rounded" src="/demo.mp4" />
+          </div>
+        </div>
+      )}
+
       {/* Footer */}
       <footer className=" bg-white px-4 py-12">
         <div className="mx-auto max-w-6xl text-center">
           <div className="mb-4 text-2xl font-bold bg-[var(--color-primary)] bg-clip-text text-transparent">
             Emoji Clash
           </div>
-          <p className="text-gray-600">Built with React, and modern web technologies</p>
+          <p className="text-gray-600">
+            Built with React, and modern web technologies
+          </p>
           <div className="mt-4 text-sm text-gray-500">
             © 2024 Emoji Clash. Made with 💚 for players who love a twist.
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
